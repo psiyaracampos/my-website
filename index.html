@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yara Campos | Psicóloga Clínica — CRP 04/72523</title>
+  <meta name="description" content="Yara Campos, psicóloga clínica de orientação psicanalítica. Atendimento presencial em Belo Horizonte e online." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="cropped-logo-brown.jpeg" />
+  <link rel="apple-touch-icon" href="cropped-logo-brown.jpeg" />
+
+  <!-- Fontes: Cormorant Garamond (títulos), Montserrat (textos), Raleway (outros) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --wine: #6e3b3b;
+      --cream: #efe4d6;
+      --brown: #a87452;
+      --rose: #c98b7a;
+      --dark: #4a342c;
+
+      --font-title: 'Cormorant Garamond', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-ui: 'Raleway', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      background-color: var(--cream);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 { font-family: var(--font-title); font-weight: 500; color: var(--wine); line-height: 1.2; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Navegação ---------- */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background-color: rgba(239, 228, 214, 0.95);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(168, 116, 82, 0.25);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px; max-width: 1100px; margin: 0 auto;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-family: var(--font-title); font-size: 1.5rem; color: var(--wine); letter-spacing: 0.5px; }
+    .brand img { height: 46px; width: auto; border-radius: 6px; }
+    .brand .brand-text span { display: block; font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--brown); }
+    .nav-links { display: flex; gap: 28px; font-family: var(--font-ui); font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; }
+    .nav-links a { color: var(--dark); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--wine); }
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--wine); cursor: pointer; }
+
+    /* ---------- Botões ---------- */
+    .btn {
+      display: inline-block; font-family: var(--font-ui); font-size: 0.85rem;
+      letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600;
+      padding: 14px 32px; border-radius: 40px; cursor: pointer;
+      transition: all 0.25s ease; border: 2px solid transparent;
+    }
+    .btn-primary { background-color: var(--wine); color: var(--cream); }
+    .btn-primary:hover { background-color: var(--dark); }
+    .btn-whatsapp { background-color: var(--rose); color: #fff; }
+    .btn-whatsapp:hover { background-color: var(--brown); }
+
+    /* ---------- Hero / Apresentação ---------- */
+    .hero {
+      background: linear-gradient(135deg, var(--wine) 0%, var(--dark) 100%);
+      color: var(--cream); text-align: center; padding: 120px 24px 140px;
+    }
+    .hero h1 { color: var(--cream); font-size: clamp(2.6rem, 6vw, 4.4rem); margin-bottom: 6px; }
+    .hero .credential { font-family: var(--font-ui); letter-spacing: 3px; text-transform: uppercase; font-size: 0.8rem; color: var(--rose); margin-bottom: 36px; }
+    .hero p { font-family: var(--font-body); font-weight: 300; font-size: 1.15rem; max-width: 640px; margin: 0 auto 16px; opacity: 0.95; }
+    .hero .locale { font-family: var(--font-ui); font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 40px; opacity: 0.85; }
+    .hero { position: relative; overflow: hidden; }
+    .hero-ornament { margin: 0 auto 26px; display: block; width: 110px; height: auto; opacity: 0.95; }
+    .hero-wave { position: absolute; bottom: -1px; left: 0; width: 100%; height: 60px; display: block; }
+
+    /* ---------- Seções ---------- */
+    section { padding: 90px 0; }
+    section:nth-of-type(even) { background-color: #f6efe5; }
+    .section-label { font-family: var(--font-ui); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--brown); margin-bottom: 10px; }
+    .section-title { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 20px; }
+    /* Ornamento decorativo sob os títulos (inspirado na arte do card) */
+    .section-title::after {
+      content: ''; display: block; width: 72px; height: 2px; margin-top: 14px;
+      background: linear-gradient(90deg, var(--brown), var(--rose));
+      border-radius: 2px;
+    }
+    .contact .section-title::after, .hero .section-title::after { margin-left: auto; margin-right: auto; }
+    section:not(#atendimentos):not(#faq) .section-title { margin-bottom: 28px; }
+    .section-text p { margin-bottom: 18px; font-weight: 300; font-size: 1.05rem; }
+
+    /* ---------- Sobre (foto + texto) ---------- */
+    .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 56px; align-items: center; }
+    .about-photo { position: relative; }
+    .about-photo img {
+      width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 12px; display: block;
+      box-shadow: 0 18px 40px rgba(74, 52, 44, 0.25);
+    }
+    .about-photo::before {
+      content: ''; position: absolute; top: 18px; left: -18px; right: 18px; bottom: -18px;
+      border: 2px solid var(--brown); border-radius: 12px; z-index: -1;
+    }
+    .photo-placeholder {
+      width: 100%; aspect-ratio: 3 / 4; border-radius: 12px;
+      background: linear-gradient(145deg, #f3ebe0 0%, #e3d2bf 100%);
+      border: 1.5px dashed var(--brown);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 10px; color: var(--brown);
+    }
+    .photo-placeholder .ph-icon { font-size: 2.4rem; }
+    .photo-placeholder .ph-text { font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+
+    /* ---------- Atendimentos (cards) ---------- */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 10px; }
+    .card {
+      background-color: var(--cream); border: 1px solid rgba(168, 116, 82, 0.3);
+      border-radius: 10px; padding: 36px 32px;
+    }
+    section:nth-of-type(even) .card { background-color: #fff; }
+    .card { position: relative; overflow: hidden; }
+    .card::after {
+      content: ''; position: absolute; top: -30px; right: -30px; width: 100px; height: 100px;
+      border-radius: 50%; background: radial-gradient(circle, rgba(201,139,122,0.18), transparent 70%);
+    }
+    .card h3 { font-size: 1.7rem; margin-bottom: 14px; }
+    .card .icon {
+      font-size: 1.5rem; margin-bottom: 16px; display: inline-flex; align-items: center; justify-content: center;
+      width: 60px; height: 60px; border-radius: 50%; background-color: var(--cream);
+      border: 1.5px solid var(--brown); overflow: hidden;
+    }
+    .card .icon img { width: 68%; height: 68%; object-fit: contain; }
+    section:nth-of-type(even) .card .icon { background-color: #f6efe5; }
+    .card p { font-weight: 300; }
+
+    /* ---------- FAQ ---------- */
+    .faq-item {
+      border-bottom: 1px solid rgba(168, 116, 82, 0.35);
+    }
+    .faq-question {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      font-family: var(--font-ui); font-weight: 600; font-size: 1.02rem; color: var(--wine);
+      padding: 22px 40px 22px 0; position: relative; display: flex; align-items: center;
+    }
+    .faq-question::after {
+      content: '+'; position: absolute; right: 0; font-size: 1.6rem; font-weight: 400;
+      color: var(--brown); transition: transform 0.25s;
+    }
+    .faq-item.open .faq-question::after { content: '−'; }
+    .faq-answer {
+      max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .faq-answer p { font-weight: 300; padding-bottom: 22px; }
+    .faq-item.open .faq-answer { max-height: 500px; }
+
+    /* ---------- Contato ---------- */
+    .contact { background: linear-gradient(135deg, var(--brown) 0%, var(--wine) 100%); color: var(--cream); text-align: center; }
+    .contact h2 { color: var(--cream); }
+    .contact .section-label { color: var(--rose); }
+    .contact p { font-weight: 300; max-width: 560px; margin: 0 auto 32px; }
+    .contact-details {
+      margin-top: 46px; font-family: var(--font-ui); font-size: 0.92rem; line-height: 2; letter-spacing: 0.5px;
+    }
+    .contact-details strong { font-family: var(--font-title); font-size: 1.4rem; font-weight: 500; display: block; margin-bottom: 4px; }
+    .contact-details a { color: var(--cream); border-bottom: 1px solid var(--rose); }
+
+    /* ---------- Rodapé ---------- */
+    footer { background-color: var(--dark); color: var(--cream); text-align: center; padding: 34px 24px; font-family: var(--font-ui); font-size: 0.8rem; letter-spacing: 0.5px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+    .footer-logo { height: 54px; width: auto; border-radius: 8px; opacity: 0.95; }
+
+    /* ---------- Responsivo ---------- */
+    @media (max-width: 760px) {
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0; background-color: var(--cream);
+        border-bottom: 1px solid rgba(168,116,82,0.25); padding: 8px 0;
+      }
+      .nav-links.show { display: flex; }
+      .nav-links a { padding: 14px 24px; }
+      .nav-toggle { display: block; }
+      .cards { grid-template-columns: 1fr; }
+      section { padding: 64px 0; }
+      .hero { padding: 90px 24px 80px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo { max-width: 420px; margin: 0 auto; }
+      .about-photo::before { left: -12px; right: 12px; }
+      .brand img { height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ====== NAVEGAÇÃO ====== -->
+  <header>
+    <nav class="nav">
+      <a href="#inicio" class="brand">
+        <img src="cropped-logo-brown.jpeg" alt="Logo Yara Campos" />
+        <span class="brand-text">Yara Campos<span>Psicóloga Clínica</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Abrir menu" onclick="document.getElementById('navLinks').classList.toggle('show')">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre">A Psicóloga</a>
+        <a href="#psicoterapia">Psicoterapia</a>
+        <a href="#atendimentos">Atendimentos</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ====== 1. APRESENTAÇÃO ====== -->
+  <section class="hero" id="inicio">
+    <div class="container">
+      <img class="hero-ornament" src="top-logo.png" alt="" aria-hidden="true" />
+      <h1>Yara Campos</h1>
+      <p class="credential">Psicóloga Clínica · CRP 04/72523</p>
+      <p>Psicoterapia de orientação psicanalítica, com uma escuta atenta à história, às relações e à singularidade de cada pessoa.</p>
+      <p class="locale">Atendimento presencial em Belo Horizonte e online.</p>
+      <a href="#contato" class="btn btn-primary">Informações sobre atendimento</a>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,40 C240,80 480,0 720,30 C960,60 1200,10 1440,40 L1440,80 L0,80 Z" fill="#efe4d6" />
+    </svg>
+  </section>
+
+  <!-- ====== 2. A PSICÓLOGA ====== -->
+  <section id="sobre">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="yara-perfil.jpg" alt="Yara Campos, psicóloga clínica" />
+        </div>
+        <div class="about-text">
+          <p class="section-label">Quem sou eu</p>
+          <h2 class="section-title">A psicóloga</h2>
+          <div class="section-text">
+            <p>Yara Maria de Campos, psicóloga clínica, atuo com base na clínica psicanalítica. Minha trajetória profissional reúne experiências em saúde mental, educação e organizações. Sou especialista em Gestão Escolar e atuo também na formação de grupos, no ensino e no desenvolvimento de projetos.</p>
+            <p>Na clínica, meu trabalho é orientado pela escuta, pelo compromisso ético e pelo respeito à singularidade de cada sujeito.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 3. A PSICOTERAPIA ====== -->
+  <section id="psicoterapia">
+    <div class="container">
+      <p class="section-label">O que é</p>
+      <h2 class="section-title">A psicoterapia</h2>
+      <div class="section-text">
+        <p>A psicoterapia é um processo de acompanhamento psicológico realizado por meio de encontros regulares, geralmente semanais. Na abordagem psicanalítica, a fala e a escuta são fundamentais para compreender experiências, sentimentos, conflitos e relações, incluindo questões que nem sempre conseguimos reconhecer ou compreender com facilidade.</p>
+        <p>Cada processo acontece de maneira singular, respeitando a história, as necessidades e o tempo de cada pessoa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 4. OS ATENDIMENTOS ====== -->
+  <section id="atendimentos">
+    <div class="container">
+      <p class="section-label">Como funciona</p>
+      <h2 class="section-title">Os atendimentos</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="icon"><img src="presencial-logo.png" alt="" aria-hidden="true" /></span>
+          <h3>Presencial</h3>
+          <p>Atendimento para crianças, adolescentes, jovens e adultos. Consultório no bairro Coração Eucarístico, em Belo Horizonte (MG).</p>
+        </div>
+        <div class="card">
+          <span class="icon"><img src="online-logo.png" alt="" aria-hidden="true" /></span>
+          <h3>Online</h3>
+          <p>Atendimento por videochamada para adolescentes, jovens e adultos, no Brasil e no exterior, através da plataforma Google Meet, observadas as condições técnicas, éticas e legais aplicáveis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 5. PERGUNTAS FREQUENTES ====== -->
+  <section id="faq">
+    <div class="container">
+      <p class="section-label">Tire suas dúvidas</p>
+      <h2 class="section-title">Perguntas frequentes</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">Nunca fiz terapia. Como começar?</button>
+        <div class="faq-answer"><p>Você pode entrar em contato pelo WhatsApp para receber informações sobre o atendimento e esclarecer dúvidas iniciais. Além disso, a primeira sessão é um momento para conversarmos sobre o que motivou sua procura, suas expectativas e o funcionamento do processo psicoterapêutico. Não é necessário chegar com tudo organizado ou saber exatamente o que dizer.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Como faço para agendar uma sessão?</button>
+        <div class="faq-answer"><p>O agendamento é realizado pelo WhatsApp. Por lá, podemos conversar sobre a modalidade de atendimento, os horários disponíveis e as informações necessárias para o início do acompanhamento.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">O pagamento é realizado semanalmente?</button>
+        <div class="faq-answer"><p>Há possibilidade de organizar o pagamento dos honorários de forma semanal ou mensal. As condições são combinadas previamente, de acordo com a organização dos atendimentos.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Você atende pessoas de todas as idades?</button>
+        <div class="faq-answer"><p>Sim, porém os atendimentos infantis acontecem exclusivamente na modalidade presencial. Para as demais faixas etárias, há possibilidade de atendimento presencial ou online.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Como funciona o atendimento online?</button>
+        <div class="faq-answer"><p>As sessões acontecem por videochamada, através da plataforma Google Meet, em horário previamente agendado. É importante que o paciente esteja em um ambiente reservado, com privacidade e condições adequadas para a conversa. Em caso de perda de conexão, a sessão é remarcada.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">A psicoterapia tem duração determinada?</button>
+        <div class="faq-answer"><p>Não existe um prazo único para o processo psicoterapêutico. Sua duração considera as questões apresentadas, o desenvolvimento do acompanhamento e as necessidades de cada paciente.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">O que é conversado durante as sessões é confidencial?</button>
+        <div class="faq-answer"><p>Sim. O sigilo profissional é um princípio fundamental da prática psicológica. As informações compartilhadas durante o acompanhamento são protegidas conforme o Código de Ética Profissional, observadas as situações excepcionais previstas nas normas aplicáveis.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Como funciona o atendimento de crianças e adolescentes?</button>
+        <div class="faq-answer"><p>O acompanhamento considera as particularidades de cada faixa etária. No caso de crianças e adolescentes, a participação dos responsáveis é organizada conforme as necessidades do atendimento, respeitando os direitos e a privacidade do paciente.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== 6. CONTATO ====== -->
+  <section class="contact" id="contato">
+    <div class="container">
+      <p class="section-label">Informações e agendamentos</p>
+      <h2 class="section-title">Contato</h2>
+      <p>Para saber mais sobre os atendimentos, consultar horários ou agendar uma sessão, entre em contato.</p>
+      <a href="https://wa.me/5531993038311" target="_blank" rel="noopener" class="btn btn-whatsapp">Conversar pelo WhatsApp</a>
+
+      <div class="contact-details">
+        <strong>Yara Campos · Psicóloga Clínica</strong>
+        CRP 04/72523 — Belo Horizonte, MG<br />
+        <a href="https://instagram.com/psiyaracampos" target="_blank" rel="noopener">@psiyaracampos</a> ·
+        <a href="mailto:psiyaracampos@gmail.com">psiyaracampos@gmail.com</a> ·
+        <a href="https://wa.me/5531993038311" target="_blank" rel="noopener">(31) 9 9303-8311</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <img src="logo-no background.png" alt="Logo Yara Campos" class="footer-logo" />
+    <div>© <span id="year"></span> Yara Campos · Psicóloga Clínica · CRP 04/72523</div>
+  </footer>
+
+  <script>
+    // FAQ acordeão
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        this.parentElement.classList.toggle('open');
+      });
+    });
+
+    // Fecha menu mobile ao clicar em um link
+    document.querySelectorAll('#navLinks a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navLinks').classList.remove('show');
+      });
+    });
+
+    // Ano atual no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
